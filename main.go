@@ -17,6 +17,8 @@ import (
 	wrapper "github.com/SevereCloud/vksdk/longpoll-user/v3"
 	"github.com/buger/jsonparser"
 	scribble "github.com/nanobox-io/golang-scribble"
+
+	. "vkbot/utils"
 )
 
 type LastPost struct {
@@ -30,7 +32,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	config := configParse()
+	config := ConfigParse()
 
 	wallCount := 0
 
