@@ -6,10 +6,11 @@ import (
 	"log"
 	"math/rand"
 
-	"github.com/SevereCloud/vksdk/api"
-	_ "github.com/adam-lavrik/go-imath/ix"
 	"strings"
 	"time"
+
+	"github.com/SevereCloud/vksdk/api"
+	_ "github.com/adam-lavrik/go-imath/ix"
 
 	"github.com/masatana/go-textdistance"
 
@@ -147,6 +148,13 @@ func getOtvet(a string, userID int, vk *api.VK, isChat bool, ChatID, BotID int, 
 		return Infa(alist, userID, db, vk)
 	case "когда":
 		return When(alist, userID, db, vk)
+	case "скажи", "say":
+		if !onWall {
+			return Say(alist, userID, ChatID, db, vk)
+		}
+		answer, _ := jsonparser.GetString(config, "commandOnWallDontWorks")
+		answer = GetRegularData(answer, userID, vk)
+		return answer, "", 0
 	case "о":
 		if len(alist) == 2 || strings.ToLower(alist[1]) == "боте" {
 
