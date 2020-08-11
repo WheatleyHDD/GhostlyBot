@@ -1,5 +1,5 @@
 ﻿{
-    "access_token": "",
+    "access_token": "64e5e45a0d1af4faa189bcfd75342af5865460f3d8525b8c634ba236f828555753056f35a7d9369d008ee",
     "appeal": "призрак, ",
     "help_text": "Все команды:-n-nБолее подробные разъяснения команд можно посмотреть здесь: https://vk.com/@ghostlybot-komandy",
     "about": "Привет! Я GhostlyBot. Можешь называть меня просто - Призрак. Я сижу на чердаке, оттуда же и пишу тебе. Я очень умная и могу поддержать разговор. А когда я тебе надоем - можешь использовать команды (\"Команды\")\n\nСейчас я работаю на Golang версии 1.14.3\n\nМой разработчик: [id388726687|Дмитрий Волков]. По любым вопросам, кроме тупых, обращаемся к нему\n\nОфициальная группа бота: https://vk.com/ghostlybot\n\nИспользованны библиотеки:\nhttps://github.com/SevereCloud/vksdk\nhttps://github.com/buger/jsonparser\nhttps://github.com/adam-lavrik/go-imath/ix\nhttps://github.com/masatana/go-textdistance\nhttps://github.com/o1egl/govatar\n\nПриятного времяпровождения!",
@@ -54,11 +54,14 @@
         "undefined": "Когда что?",
         "commandDone": "Примерно через %value%"
       },
-      "avaGen": {
+      "genAva": {
         "error": "У меня тут какая-то ошибка. Попробуй чуть позже",
         "incorrectField": "Короче, у меня тут какая-то несостыковка. Ты либо что-то не дописал, либо что-то не написал",
         "commandDone": "Ава для %value%",
         "undefined": "Ген, чего? Аватарок? допиши \"ава\" и все"
+      },
+      "say": {
+        "undefined": "Что тебе сказать?"
       }
     }
 }

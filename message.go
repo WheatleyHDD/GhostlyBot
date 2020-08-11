@@ -163,10 +163,9 @@ func getOtvet(a string, userID int, vk *api.VK, isChat bool, ChatID, BotID int, 
 			answer, _ := jsonparser.GetString(config, "about")
 			answer = GetRegularData(answer, userID, vk)
 			return answer, "", 0
-
 		}
 	case "ген", "gen":
-		Gen(alist, userID, ChatID, db, vk)
+		return Gen(alist, userID, ChatID, db, vk)
 	}
 	reta, retattach, _ := getAnsw(a, userID, vk)
 	return reta, retattach, 0
