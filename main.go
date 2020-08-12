@@ -274,89 +274,91 @@ func checkWalls(vk *api.VK, db *scribble.Driver, config []byte, appeal string, B
 		if err != nil {
 			log.Println(err)
 		} else {
-			last_post := LastPost{}
-			_ = db.Read("last_post_ids", strconv.Itoa(posts.Items[0].OwnerID), &last_post)
-			if last_post.ID != 0 {
-				if posts.Items[0].ID > last_post.ID {
-					if strings.HasPrefix(strings.ToLower(posts.Items[0].Text), strings.ToLower(appeal)) || strings.HasPrefix(strings.ToLower(posts.Items[0].Text), "бот, ") {
-						messageArr := strings.Split(posts.Items[0].Text, " ")
-						messageArr[0] = ""
+			if len(posts.Items) != 0 {
+				last_post := LastPost{}
+				_ = db.Read("last_post_ids", strconv.Itoa(posts.Items[0].OwnerID), &last_post)
+				if last_post.ID != 0 {
+					if posts.Items[0].ID > last_post.ID {
+						if strings.HasPrefix(strings.ToLower(posts.Items[0].Text), strings.ToLower(appeal)) || strings.HasPrefix(strings.ToLower(posts.Items[0].Text), "бот, ") {
+							messageArr := strings.Split(posts.Items[0].Text, " ")
+							messageArr[0] = ""
 
-						message := ""
+							message := ""
 
-						for i, v := range messageArr {
+							for i, v := range messageArr {
 
-							if v != "" {
-								if i == 1 {
-									message = strings.Join([]string{message, v}, "")
-								} else {
-									message = strings.Join([]string{message, v}, " ")
-								}
+								if v != "" {
+									if i == 1 {
+										message = strings.Join([]string{message, v}, "")
+									} else {
+										message = strings.Join([]string{message, v}, " ")
+									}
 
-							}
-						}
-
-						log.Printf("Получено сообщение со стены %v с текстом: %s\n", ownid, message)
-
-						photoURL := ""
-
-						for _, a := range posts.Items[0].Attachments {
-							if a.Type == "photo" {
-								photoURL = a.Photo.Sizes[len(a.Photo.Sizes)-1].URL
-								break
-							}
-						}
-
-						time.Sleep(time.Second)
-
-						rand.Seed(time.Now().UnixNano())
-
-						otv, attach, _ := getOtvet(message, posts.Items[0].FromID, vk, false, posts.Items[0].FromID, BotID, helpText, photoURL, 0, true, db)
-
-						data, err := ioutil.ReadFile("blacklist.txt")
-						if err != nil {
-							panic(err)
-						}
-						s := string(data)
-						ss := strings.Split(s, "\n")
-						for i := range ss {
-							if ss[i] != "" || ss[i] != " " {
-								if strings.Contains(strings.ToLower(message), ss[i]) {
-									onAttemptToBlock := "Маму свою заблокируй! Слышал, ты, пузырик пакостный?!"
-									onAttemptToBlock, _ = jsonparser.GetString(config, "onAttemptToBlock")
-									otv, attach = onAttemptToBlock, ""
 								}
 							}
-						}
 
-						vk.WallCreateComment(api.Params{
-							"owner_id":    ownid,
-							"post_id":     posts.Items[0].ID,
-							"message":     otv,
-							"attachments": attach,
-							"guid":        rand.Intn(12343242345235),
-						})
+							log.Printf("Получено сообщение со стены %v с текстом: %s\n", ownid, message)
 
-						//log.Println(resp)
+							photoURL := ""
 
-						/*
-							_, err := vk.MessagesSend(api.Params{
-								"peer_id":    m.PeerID,
-								"message":    otv,
-								"attachment": attach,
-								"random_id":  0,
-								"reply_to":   m.MessageID,
+							for _, a := range posts.Items[0].Attachments {
+								if a.Type == "photo" {
+									photoURL = a.Photo.Sizes[len(a.Photo.Sizes)-1].URL
+									break
+								}
+							}
+
+							time.Sleep(time.Second)
+
+							rand.Seed(time.Now().UnixNano())
+
+							otv, attach, _ := getOtvet(message, posts.Items[0].FromID, vk, false, posts.Items[0].FromID, BotID, helpText, photoURL, 0, true, db)
+
+							data, err := ioutil.ReadFile("blacklist.txt")
+							if err != nil {
+								panic(err)
+							}
+							s := string(data)
+							ss := strings.Split(s, "\n")
+							for i := range ss {
+								if ss[i] != "" || ss[i] != " " {
+									if strings.Contains(strings.ToLower(message), ss[i]) {
+										onAttemptToBlock := "Маму свою заблокируй! Слышал, ты, пузырик пакостный?!"
+										onAttemptToBlock, _ = jsonparser.GetString(config, "onAttemptToBlock")
+										otv, attach = onAttemptToBlock, ""
+									}
+								}
+							}
+
+							vk.WallCreateComment(api.Params{
+								"owner_id":    ownid,
+								"post_id":     posts.Items[0].ID,
+								"message":     otv,
+								"attachments": attach,
+								"guid":        rand.Intn(12343242345235),
 							})
-						*/
-						if err != nil {
-							log.Println(err)
-						}
 
+							//log.Println(resp)
+
+							/*
+								_, err := vk.MessagesSend(api.Params{
+									"peer_id":    m.PeerID,
+									"message":    otv,
+									"attachment": attach,
+									"random_id":  0,
+									"reply_to":   m.MessageID,
+								})
+							*/
+							if err != nil {
+								log.Println(err)
+							}
+
+						}
+						db.Write("last_post_ids", strconv.Itoa(posts.Items[0].OwnerID), LastPost{ownid, posts.Items[0].ID})
 					}
+				} else {
 					db.Write("last_post_ids", strconv.Itoa(posts.Items[0].OwnerID), LastPost{ownid, posts.Items[0].ID})
 				}
-			} else {
-				db.Write("last_post_ids", strconv.Itoa(posts.Items[0].OwnerID), LastPost{ownid, posts.Items[0].ID})
 			}
 		}
 		count = count + 1
