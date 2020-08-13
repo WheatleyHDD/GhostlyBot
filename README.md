@@ -25,6 +25,9 @@ https://vk.com/id574715826
 Как дела?|Все хорошо, а у тебя|
 Какой твой любимый мем?|Этот|photo574715826_457239130
 ```
+
+[Python-скрипт для конвертации базы с FP iHA Bot на базу GhostlyBot]: https://github.com/WheatleyHDD/GhostBDGen
+
 ### settings.json
 Костяк всего и вся. Самое важное поле: "access_token"
 Получить access_token можно здесь: https://vkhost.github.io/
