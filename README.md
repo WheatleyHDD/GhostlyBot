@@ -59,6 +59,9 @@ https://vk.com/id574715826
 * lobster.ttf
 * и сам исполняемый файл
 
+## Часто задаваемые вопросы
+[Часто задаваемые -тупые- вопросы](https://github.com/WheatleyHDD/GhostlyBot/blob/master/faq.md)
+
 ## Контакты
-Группа бота: https://vk.com/ghostlybot
+Группа бота: https://vk.com/ghostlybot<br/>
 Разработчик: https://vk.com/dimasas2
