@@ -60,7 +60,7 @@ https://vk.com/id574715826
 * и сам исполняемый файл
 
 ## Часто задаваемые вопросы
-[Часто задаваемые -тупые- вопросы](https://github.com/WheatleyHDD/GhostlyBot/blob/master/faq.md)
+[Часто задаваемые ~~тупые~~ вопросы](https://github.com/WheatleyHDD/GhostlyBot/blob/master/faq.md)
 
 ## Контакты
 Группа бота: https://vk.com/ghostlybot<br/>
