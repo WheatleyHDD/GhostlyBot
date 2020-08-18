@@ -165,6 +165,11 @@ func getOtvet(a string, userID int, vk *api.VK, isChat bool, ChatID, BotID int, 
 			return answer, "", 0
 		}
 	case "ген", "gen":
+		if onWall {
+			answer, _ := jsonparser.GetString(config, "commandOnWallDontWorks")
+			answer = GetRegularData(answer, userID, vk)
+			return answer, "", 0
+		}
 		return Gen(alist, userID, ChatID, db, vk)
 	}
 	reta, retattach, _ := getAnsw(a, userID, vk)

@@ -17,6 +17,7 @@ func Choose(a string, userID int, db *scribble.Driver, vk *api.VK) (otvet string
 		StoreStatistic("выбери", db)
 
 		a = strings.Replace(a, "выбери ", "", 1)
+		a = strings.Replace(a, "Выбери ", "", 1)
 		opinions := strings.Split(a, " или ")
 		rand.Seed(time.Now().UnixNano())
 		opinion := rand.Intn(len(opinions))
