@@ -62,6 +62,9 @@ https://vk.com/id574715826
 ## Часто задаваемые вопросы
 [Часто задаваемые ~~тупые~~ вопросы](https://github.com/WheatleyHDD/GhostlyBot/blob/master/faq.md)
 
+## Сбор статистики
+https://github.com/WheatleyHDD/GhostlyBotStat
+
 ## Контакты
 Группа бота: https://vk.com/ghostlybot<br/>
 Разработчик: https://vk.com/dimasas2
