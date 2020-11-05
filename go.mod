@@ -7,6 +7,7 @@ require (
 	github.com/adam-lavrik/go-imath v0.0.0-20200104135348-19d2b923d06c
 	github.com/buger/jsonparser v1.0.0
 	github.com/deckarep/golang-set v1.7.1 // indirect
+	github.com/evalphobia/google-tts-go v0.3.0
 	github.com/fogleman/gg v1.3.0
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/imroc/req v0.3.0
